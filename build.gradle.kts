@@ -37,20 +37,20 @@ subprojects {
     }
 
     configure<PublishingExtension> {
-        if (findProperty("MAVEN_PASSWORD") != null && findProperty("MAVEN_USERNAME") != null) {
+        if (findProperty("releaseUsername") != null && findProperty("releasePassword") != null) {
             repositories {
-                val snapshots = "https://maven.arbjerg.dev/snapshots"
-                val releases = "https://maven.arbjerg.dev/releases"
+                val snapshots = "https://maven.xirado.dev/snapshots"
+                val releases = "https://maven.xirado.dev/releases"
 
                 maven(if (release) releases else snapshots) {
                     credentials {
-                        password = findProperty("MAVEN_PASSWORD") as String?
-                        username = findProperty("MAVEN_USERNAME") as String?
+                        password = findProperty("releasePassword") as String?
+                        username = findProperty("releaseUsername") as String?
                     }
                 }
             }
         } else {
-            logger.lifecycle("Not publishing to maven.arbjerg.dev because credentials are not set")
+            logger.lifecycle("Not publishing to maven.xirado.dev because credentials are not set")
         }
     }
 
